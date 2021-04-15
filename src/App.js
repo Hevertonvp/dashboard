@@ -1,10 +1,22 @@
+import React from 'react'
+import * as s from './App.Styles'
+import Sidebar from './components/Sidebar/Sidebar'
+import MainView from './components/MainView/MainView'
+
+const App = () => {
+
+  const backgroundImage = 'img/2808.jpg'
 
 
-function App() {
   return (
-    <div className="App">
-      <h1> sidebar</h1>
-    </div>
+    <s.App>
+      <Sidebar
+        backgroundImage={backgroundImage}
+        header="There is no other way"
+      />
+
+      <MainView />
+    </s.App>
   );
 }
 
