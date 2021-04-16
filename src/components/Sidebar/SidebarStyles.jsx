@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 
 export const SidebarContainer = styled.div`
-width: 20%;
+width: ${props => props.isSidebarOpen ? '20%' : '5%'};
 max-width: 280px;
 min-width: 80px;
 background-image: linear-gradient(
@@ -14,6 +14,8 @@ background-image: linear-gradient(
 backgorund-size: cover;
 background-repeat: no-repeat;
 background-position: center center;
+position: relative;
+transition: .2s ease-in all
 `
 
 export const SidebarHeader = styled.h4`
@@ -28,6 +30,9 @@ export const MenuItemContainer = styled.div`
 
 `
 export const MenuItem = styled.div`
+${props => !props.isSidebarOpen && `
+text-align: center;
+` }
 text-align: left;
 padding: 10px 30px;
 font-weight: 500;
@@ -36,7 +41,6 @@ font-family: ${props => props.font};
 &: hover{
     color: rgba(255,255,255);
     transition: .1s erase-in all; 
-
 }
 &: after{
     content: '';
@@ -56,11 +60,37 @@ ${props => !props.selected && `
 
 `;
 
-
 export const Text = styled.p`
-display: inline
+display: ${props => props.isSidebarOpen ? 'inline' : 'none'}
 `
 export const Icon = styled.span`
-margin-right: 15px;
+${props => props.isSidebarOpen ? 'margin-right: 15px' : ''}
 color: white;
+`
+////toggler:
+
+export const TogglerContainer = styled.div`
+position: absolute;
+width: 30%;
+botton: 10%;
+left: 0;
+right: 0;
+margin: 0 auto;
+`
+export const Toggler = styled.div`
+margin-top: 40px;
+height: 40px;
+cursor: pointer;
+position: relative;  
+
+&:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .25em;
+    width: 100%;
+    height: .1em;
+    background: #fff;
+    box-shadow: 0 .75em 0 0 #fff, 0 1.5em 0 0 #fff;
+    }
 `

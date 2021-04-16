@@ -7,6 +7,10 @@ import { BsFillAlarmFill, BsFillBootstrapFill, BsFillPeopleFill, BsFillXDiamondF
 const App = () => {
 
   const backgroundImage = 'img/2808.jpg'   /*converter para uma resolução menor antes do deploy*/
+  const sidebarHeader = {
+    fullName: "Bem Vindo, (name)",
+    shortName: "open"
+  }
   const menuItems = [
 
     { name: "home", to: '/', icon: <BsFillAlarmFill />, submenuItems: [] },
@@ -29,7 +33,7 @@ const App = () => {
     <s.App>
       <Sidebar
         backgroundImage={backgroundImage}
-        header="Bem vindo, João Doyle (name)"
+        sidebarHeader={sidebarHeader}
         menuItems={menuItems}
         fonts={fonts}
       />
