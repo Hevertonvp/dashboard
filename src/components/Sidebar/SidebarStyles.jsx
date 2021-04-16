@@ -23,7 +23,19 @@ margin-botton: 10px;
 letter-spacing: 4px;
 color: white;
 `
+export const MenuItemContainer = styled.div`
 
+`
+export const MenuItem = styled.div`
+text-align: left;
+padding: 6px 20px;
+font-weight: 600;
+color: rgba(19, 15, 64);
 
-
-
+`
+export const Text = styled.p`
+display: inline
+`
+export const Icon = styled.span`
+margin-right: 15px;
+`
