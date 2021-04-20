@@ -27,17 +27,19 @@ color: white;
 font-family: ${props => props.font};
 `
 export const MenuItemContainer = styled.div`
-
 `
 export const MenuItem = styled.div`
+${props => !props.isSidebarOpen ? `
+text-align: center`: ``};
 ${props => !props.isSidebarOpen && `
-text-align: center;
-` }
-text-align: left;
+${props.selected && 'background-color: rgba(0,0,0,0.3); transition: .5s ease-in all'}
+`};
+position: relative;     // por causa do dropdown icon
 padding: 10px 30px;
-font-weight: 500;
+font-weight: 600;
 color: ${props => props.selected ? 'rgba(255,255,255)' : 'rgba(19, 15, 64)'};
 font-family: ${props => props.font};
+white-space: nowrap;
 &: hover{
     color: rgba(255,255,255);
     transition: .1s erase-in all; 
@@ -64,9 +66,20 @@ export const Text = styled.p`
 display: ${props => props.isSidebarOpen ? 'inline' : 'none'}
 `
 export const Icon = styled.span`
-${props => props.isSidebarOpen ? 'margin-right: 15px' : ''}
+${props => props.isSidebarOpen ? 'margin-right: 15px; transition: .3s ease-in all' : ''};
 color: white;
 `
+//dropdown icon:--------------------------------------
+export const DropdownIcon = styled.span`
+position: absolute;
+top 12px;
+border: solid blue;
+border-width: 0 1px 1px 0;
+padding: 3px;
+tranform: rotate(45deg)
+
+`
+
 ////toggler:
 
 export const TogglerContainer = styled.div`

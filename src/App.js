@@ -8,18 +8,23 @@ const App = () => {
 
   const backgroundImage = 'img/2808.jpg'   /*converter para uma resolução menor antes do deploy*/
   const sidebarHeader = {
-    fullName: "Bem Vindo, (name)",
+    fullName: "name",
     shortName: "open"
   }
   const menuItems = [
 
     { name: "home", to: '/', icon: <BsFillAlarmFill />, submenuItems: [] },
-    { name: "product", to: '/', icon: <BsFillBootstrapFill />, submenuItems: [] },
-    { name: "client", to: '/', icon: <BsFillPeopleFill />, submenuItems: [] },
     {
-      name: "numbers", to: '/', icon: <BsFillXDiamondFill />, submenuItems: [
-        { name: "sells", to: "/sells" },
-        { name: "clients range", to: "/clients" },
+      name: "produtos", to: '/produtos', icon: <BsFillBootstrapFill />, submenuItems: [
+        { name: "vendas", to: '/vendas' },
+        { name: "inventário", to: '/inventario'},
+      ]
+    },
+    { name: "clientes", to: '/clientes', icon: <BsFillPeopleFill />, submenuItems: [] },
+    {
+      name: "números", to: '/numeros', icon: <BsFillXDiamondFill />, submenuItems: [
+        { name: "lorem", to: "/lorem" },  
+        { name: "ipsun", to: "/ipsun" },
         { name: "profit", to: "/profit" }
       ]
     },

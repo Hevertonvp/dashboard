@@ -27,20 +27,38 @@ const Sidebar = props => {
     const handleMenuItemClick = name => {
         setSelected(name)
     }
-    console.log('scsc')
+
+
+    useEffect(() => {
+        const updateWindowWidth = () => {
+            if (window.innerWidth < 1000) {
+                setSidebarState(false)
+            }
+            else setSidebarState(true)
+        }
+        window.addEventListener('resize', updateWindowWidth);
+        return () => window.removeEventListener('resize', updateWindowWidth)     //limpa a memória, evita que o EL permaneça ativo
+    }, [isSidebarOpen]);
 
 
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
+
+        const hasSubmenus = !!item.submenuItems.lenght; // maior que zero: true
+
         return (
             <s.MenuItem
                 key={index}
                 fonts={fonts.menu}
                 selected={isItemSelected}
                 onClick={() => handleMenuItemClick(item.name)}
+                isSidebarOpen={isSidebarOpen}
             >
                 <s.Icon isSidebarOpen={isSidebarOpen}>{item.icon}</s.Icon>
                 <s.Text isSidebarOpen={isSidebarOpen}>{item.name}</s.Text>   {/*tag p com uma string*/}
+                {hasSubmenus && (
+                    <s.DropdownIcon />
+                )}
             </s.MenuItem>
         )
     })
