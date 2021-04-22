@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 
 export const SidebarContainer = styled.div`
-width: ${props => props.isSidebarOpen ? '20%' : '5%'};
+width: ${props => props.isSidebarOpen ? '100%' : '5%'};
 max-width: 280px;
 min-width: 80px;
 background-image: linear-gradient(
@@ -21,18 +21,22 @@ transition: .2s ease-in all
 export const SidebarHeader = styled.h4`
 padding: 20px 10px;
 text-align: center;
-margin-botton: 10px;
+margin-bottom: 10px;
 letter-spacing: 4px;
 color: white;
 font-family: ${props => props.font};
 `
-export const MenuItemContainer = styled.div`
-`
+//menu items
+export const MenuItemContainer = styled.div``
+export const ItemContainer = styled.div``
+
+
+
 export const MenuItem = styled.div`
 ${props => !props.isSidebarOpen ? `
 text-align: center`: ``};
 ${props => !props.isSidebarOpen && `
-${props.selected && 'background-color: rgba(0,0,0,0.3); transition: .5s ease-in all'}
+${props.selected && 'background-color: rgba(0,0,0,0.4); transition: .3s ease-in all'}
 `};
 position: relative;     // por causa do dropdown icon
 padding: 10px 30px;
@@ -66,26 +70,47 @@ export const Text = styled.p`
 display: ${props => props.isSidebarOpen ? 'inline' : 'none'}
 `
 export const Icon = styled.span`
-${props => props.isSidebarOpen ? 'margin-right: 15px; transition: .3s ease-in all' : ''};
+${props => props.isSidebarOpen ? 'margin-right: 15px; transition: .2s ease-in all' : ''};
 color: white;
+`;
+
+//sub-menu items
+
+export const SubMenuItemContainer = styled.div`
+font-size: 14px;
+padding-top:18px;
+${props => props.isSidebarOpen && `padding-left: 15%;`}
+${props => !props.isSidebarOpen && `text-align: center;`}
 `
+export const SubMenuItem = styled.p`
+color: rgba(19, 15, 64);
+&: hover{
+color: rgba(255,255,255);
+}
+`
+
+
+
 //dropdown icon:--------------------------------------
+
+
 export const DropdownIcon = styled.span`
 position: absolute;
-top 12px;
-border: solid blue;
+top: ${props => props.isOpen ? '16px' : '12px'};
+border: solid ${props => props.selected ? 'rgba(255,255,255)' : 'rgba(19, 15, 64)'};
 border-width: 0 1px 1px 0;
 padding: 3px;
-tranform: rotate(45deg)
+transform: ${props => props.isOpen ? 'rotate(-135deg); transition: .2s ease-in all' : 'rotate(45deg); transition: .2s ease-in all'};
+right: 24px;
 
-`
+`;
 
 ////toggler:
 
 export const TogglerContainer = styled.div`
 position: absolute;
 width: 30%;
-botton: 10%;
+bottom: 10%;
 left: 0;
 right: 0;
 margin: 0 auto;

@@ -12,21 +12,18 @@ const App = () => {
     shortName: "open"
   }
   const menuItems = [
-
-    { name: "home", to: '/', icon: <BsFillAlarmFill />, submenuItems: [] },
+    { name: "home", to: '/', icon: <BsFillAlarmFill />, subMenuItems: [] },
     {
-      name: "produtos", to: '/produtos', icon: <BsFillBootstrapFill />, submenuItems: [
+      name: "produtos", to: '/produtos', icon: <BsFillBootstrapFill />, subMenuItems: [
         { name: "vendas", to: '/vendas' },
         { name: "inventário", to: '/inventario'},
+        { name: "tony", to: '/inventario'},
+        { name: "ramos", to: '/inventario'},
       ]
     },
-    { name: "clientes", to: '/clientes', icon: <BsFillPeopleFill />, submenuItems: [] },
+    { name: "clientes", to: '/clientes', icon: <BsFillPeopleFill />, subMenuItems: [] },
     {
-      name: "números", to: '/numeros', icon: <BsFillXDiamondFill />, submenuItems: [
-        { name: "lorem", to: "/lorem" },  
-        { name: "ipsun", to: "/ipsun" },
-        { name: "profit", to: "/profit" }
-      ]
+      name: "números", to: '/numeros', icon: <BsFillXDiamondFill />, subMenuItems: []
     },
   ];
   const fonts = {

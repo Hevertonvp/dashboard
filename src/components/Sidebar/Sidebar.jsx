@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as s from './SidebarStyles'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Sidebar = props => {
     const {
@@ -18,16 +19,32 @@ const Sidebar = props => {
     const [selected, setSelected] = useState(menuItems[0].name)
     const [isSidebarOpen, setSidebarState] = useState(true)
     const [header, setHeader] = useState(sidebarHeader.fullName)
+    const [subMenusStates, setSubMenus] = useState({})
+
+
 
     //Effect - primeira utilização!
+
+    //para adicionar index de items que contém sub-menus
+
+    useEffect(() => {
+        const newSubMenus = {};
+        menuItems.forEach((item, index) => {
+            const hasSubmenus = !!item.subMenuItems.length;
+            if (hasSubmenus) {
+                newSubMenus[index] = {};
+                newSubMenus[index]['isOpen'] = false;
+                newSubMenus[index]['selected'] = null
+            }
+        })
+        setSubMenus(newSubMenus)
+    }, [menuItems])
+
+
+
     useEffect(() => {
         isSidebarOpen ? setTimeout(() => setHeader(sidebarHeader.fullName), 220) : setHeader(sidebarHeader.shortName)
     }, [isSidebarOpen, sidebarHeader])
-
-    const handleMenuItemClick = name => {
-        setSelected(name)
-    }
-
 
     useEffect(() => {
         const updateWindowWidth = () => {
@@ -40,29 +57,67 @@ const Sidebar = props => {
         return () => window.removeEventListener('resize', updateWindowWidth)     //limpa a memória, evita que o EL permaneça ativo
     }, [isSidebarOpen]);
 
+    const states = {
+        index: {
+            isOpen: false,
+            selected: null,
+        }
+    }
+
+
+    const handleMenuItemClick = (name, index) => {
+        setSelected(name)
+        const subMenusCopy = JSON.parse(JSON.stringify(subMenusStates))   // wow! Pq não copiar o objeto de forma direta? 
+        if (subMenusStates.hasOwnProperty(index)) {
+            subMenusCopy[index]['isOpen'] = !subMenusStates[index]['isOpen']
+            setSubMenus(subMenusCopy)
+        }
+    }
 
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
+        const hasSubmenus = !!item.subMenuItems.length; // maior que zero: true
 
-        const hasSubmenus = !!item.submenuItems.lenght; // maior que zero: true
+        const isOpen = subMenusStates[index] ? subMenusStates[index].isOpen : null
+
+        const subMenuJSX = item.subMenuItems.map((item, index) => {
+            return (
+                <s.SubMenuItem key={index}>{item.name}</s.SubMenuItem>
+            )
+        })
+        console.log(subMenusStates)
 
         return (
-            <s.MenuItem
-                key={index}
-                fonts={fonts.menu}
-                selected={isItemSelected}
-                onClick={() => handleMenuItemClick(item.name)}
-                isSidebarOpen={isSidebarOpen}
-            >
-                <s.Icon isSidebarOpen={isSidebarOpen}>{item.icon}</s.Icon>
-                <s.Text isSidebarOpen={isSidebarOpen}>{item.name}</s.Text>   {/*tag p com uma string*/}
-                {hasSubmenus && (
-                    <s.DropdownIcon />
-                )}
-            </s.MenuItem>
+            <s.ItemContainer key={index}>
+                <s.MenuItem
+                    fonts={fonts.menu}
+                    selected={isItemSelected}
+                    onClick={() => handleMenuItemClick(item.name, index)}
+                    isSidebarOpen={isSidebarOpen}
+                >
+                    <s.Icon isSidebarOpen={isSidebarOpen}>{item.icon}</s.Icon>
+                    <s.Text isSidebarOpen={isSidebarOpen}>{item.name}</s.Text>   {/*tag p com uma string*/}
+                    {hasSubmenus && isSidebarOpen && (
+                        <s.DropdownIcon selected={isItemSelected} isOpen={isOpen} />
+                    )}
+                </s.MenuItem>
+                {/*mostrar itens apenas se existirem*/}
+                <AnimatePresence>
+                    {hasSubmenus && isOpen && (
+                        <motion.nav
+                            initial={{ opacity: 0, y: -15 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.35 }}
+                            exit={{ opacity: 0, x: -30 }}
+
+                        >
+                            <s.SubMenuItemContainer isSidebarOpen={isSidebarOpen}>{subMenuJSX}</s.SubMenuItemContainer>
+                        </motion.nav>
+                    )}
+                </AnimatePresence>
+            </s.ItemContainer>
         )
     })
-    console.log(isSidebarOpen)
     return (
         <s.SidebarContainer backgroundImage={backgroundImage} isSidebarOpen={isSidebarOpen}>
             <s.SidebarHeader font={fonts.header}>{header}</s.SidebarHeader>
