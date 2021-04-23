@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import * as s from './SidebarStyles'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Sidebar = props => {
     const {
@@ -89,18 +90,20 @@ const Sidebar = props => {
 
         return (
             <s.ItemContainer key={index}>
-                <s.MenuItem
-                    fonts={fonts.menu}
-                    selected={isItemSelected}
-                    onClick={() => handleMenuItemClick(item.name, index)}
-                    isSidebarOpen={isSidebarOpen}
-                >
-                    <s.Icon isSidebarOpen={isSidebarOpen}>{item.icon}</s.Icon>
-                    <s.Text isSidebarOpen={isSidebarOpen}>{item.name}</s.Text>   {/*tag p com uma string*/}
-                    {hasSubmenus && isSidebarOpen && (
-                        <s.DropdownIcon selected={isItemSelected} isOpen={isOpen} />
-                    )}
-                </s.MenuItem>
+                <Link to={item.to} style={{textDecoration: 'none'}}>
+                    <s.MenuItem
+                        fonts={fonts.menu}
+                        selected={isItemSelected}
+                        onClick={() => handleMenuItemClick(item.name, index)}
+                        isSidebarOpen={isSidebarOpen}
+                    >
+                        <s.Icon isSidebarOpen={isSidebarOpen}>{item.icon}</s.Icon>
+                        <s.Text isSidebarOpen={isSidebarOpen}>{item.name}</s.Text>   {/*tag p com uma string*/}
+                        {hasSubmenus && isSidebarOpen && (
+                            <s.DropdownIcon selected={isItemSelected} isOpen={isOpen} />
+                        )}
+                    </s.MenuItem>
+                </Link>
                 {/*mostrar itens apenas se existirem*/}
                 <AnimatePresence>
                     {hasSubmenus && isOpen && (
