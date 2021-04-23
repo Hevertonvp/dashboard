@@ -1,8 +1,7 @@
 import React from 'react'
 
-const About = () => {
+const Servicos = () => {
     return <h1>hihihihihihi</h1>
-    
 }
 
-export default About
+export default Servicos

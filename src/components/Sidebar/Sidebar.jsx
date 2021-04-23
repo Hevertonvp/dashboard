@@ -58,13 +58,6 @@ const Sidebar = props => {
         return () => window.removeEventListener('resize', updateWindowWidth)     //limpa a memória, evita que o EL permaneça ativo
     }, [isSidebarOpen]);
 
-    const states = {
-        index: {
-            isOpen: false,
-            selected: null,
-        }
-    }
-
 
     const handleMenuItemClick = (name, index) => {
         setSelected(name)
@@ -81,12 +74,26 @@ const Sidebar = props => {
 
         const isOpen = subMenusStates[index] ? subMenusStates[index].isOpen : null
 
+
+
+
+
+        
+
         const subMenuJSX = item.subMenuItems.map((item, index) => {
             return (
-                <s.SubMenuItem key={index}>{item.name}</s.SubMenuItem>
+                <Link to={item.to} key={index} style={{textDecoration: 'none'}}>
+                <s.SubMenuItem>{item.name}</s.SubMenuItem>
+                </Link>
             )
         })
-        console.log(subMenusStates)
+
+
+
+
+
+
+
 
         return (
             <s.ItemContainer key={index}>

@@ -2,7 +2,7 @@ import React from 'react'
 import * as s from './App.Styles'
 import Sidebar from './components/Sidebar/Sidebar'
 import MainView from './components/MainView/MainView'
-import { BsFillAlarmFill, BsFillBootstrapFill, BsFillPeopleFill, BsFillXDiamondFill } from "react-icons/bs";
+import { BsFillAlarmFill, BsFillBootstrapFill, BsFillPeopleFill } from "react-icons/bs";
 
 const App = () => {
 
@@ -22,9 +22,6 @@ const App = () => {
       ]
     },
     { name: "clientes", to: '/clientes', icon: <BsFillPeopleFill />, subMenuItems: [] },
-    {
-      name: "números", to: '/numeros', icon: <BsFillXDiamondFill />, subMenuItems: []
-    },
   ];
   const fonts = {
     header: 'Archivo Black',

@@ -1,21 +1,23 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Home from './components/Home/Home'
-import Blog from './components/Blog/Blog'
-import Destinations from './components/Destinations/Destinations'
-import Services from './components/Services/Services'
-import About from './components/About/About'
+import Home from './components/MainView/Home/Home'
+import Produtos from './components/MainView/Produtos/Produtos'
+import Clientes from './components/MainView/Clientes/Clientes'
+import Servicos from './components/MainView/Servicos/Servicos'
+import Country from './components/MainView/Clientes/Country/Country'
 
 
 const Routes = () => {
-    <Switch>
-        <Route exact path="./" component={Home} />
-        <Route exact path="/blog" component={Blog} />
-        <Route exact path="/destinations" component={Destinations} />
-        <Route exact path="/services" component={Services} />
-        <Route exact path="/about" component={About} />
+    return (
+        <Switch>
+            <Route exact path="./" component={Home} />
+            <Route exact path="/produtos" component={Produtos} />
+            <Route exact path="/clientes" component={Clientes} />
+            <Route exact path="/clientes/:country" component={Country} />
+            <Route exact path="/servicos" component={Servicos} />
 
-    </Switch>
+        </Switch>
+    )
 }
 
 export default Routes

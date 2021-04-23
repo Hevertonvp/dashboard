@@ -1,7 +1,10 @@
 import React from 'react'
 import * as s from './MainViewStyles'
+import Routes from '../../routes'
 
 const MainView = () => {
-    return <s.MainViewContainer>MainView Container</s.MainViewContainer>
+    return <s.MainViewContainer>
+        <Routes />
+    </s.MainViewContainer>
 }
 export default MainView
