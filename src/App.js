@@ -6,7 +6,7 @@ import { BsFillAlarmFill, BsFillBootstrapFill, BsFillPeopleFill } from "react-ic
 import * as Palette from './colors'
 const App = () => {
 
-  const backgroundImage = 'img/2808.jpg'   /*converter para uma resolução menor antes do deploy*/
+  const backgroundImage = 'img/montain.jpg'   /*converter para uma resolução menor antes do deploy*/
   const sidebarHeader = {
     fullName: "name",
     shortName: "open"

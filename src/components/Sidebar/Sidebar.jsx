@@ -100,7 +100,6 @@ const Sidebar = props => {
 
         const subMenuItemsJSX = item.subMenuItems.map((subMenuItem, subMenuItemIndex) => {
             const isSubMenuItemSelected = subMenusStates[index]?.selected === subMenuItemIndex
-            console.log(isSubMenuItemSelected)
             return (
                 <Link to={`${item.to}${subMenuItem.to}`} key={subMenuItemIndex} style={{ textDecoration: 'none' }}>
                     <s.SubMenuItem
