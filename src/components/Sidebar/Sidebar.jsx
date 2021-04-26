@@ -14,7 +14,16 @@ const Sidebar = props => {
         fonts = {
             header: '',
             menu: ''
+        },
+        colorPalette = {
+            bgColor1: 'rgba(252, 82, 150, 0.8)',
+            bgColor2: 'rgba(246, 112, 98, 0.8)',
+            fontColor: 'rgba(19, 15, 64)',
+            fontColorSelected: 'rgba(255, 255, 255)',
+            dividerColor: 'rgba(225, 112, 85)',
+            selectedBackgroundCollapsedMode: 'dark'
         }
+
     } = props;
 
     const [selected, setSelected] = useState(menuItems[0].name)
@@ -61,12 +70,20 @@ const Sidebar = props => {
 
     const handleMenuItemClick = (name, index) => {
         setSelected(name)
-        const subMenusCopy = JSON.parse(JSON.stringify(subMenusStates))   // wow! Pq não copiar o objeto de forma direta? 
+        const subMenusCopy = JSON.parse(JSON.stringify(subMenusStates))   // Pq não copiar o objeto de forma direta? 
         if (subMenusStates.hasOwnProperty(index)) {
             subMenusCopy[index]['isOpen'] = !subMenusStates[index]['isOpen']
             setSubMenus(subMenusCopy)
         }
+        else {
+            for (let item in subMenusStates) {
+                subMenusCopy[item]['isOpen'] = false
+                subMenusCopy[item]['seleted'] = null
+            }
+            setSubMenus(subMenusCopy)
+        }
     }
+
 
     const menuItemsJSX = menuItems.map((item, index) => {
         const isItemSelected = selected === item.name;
@@ -74,27 +91,46 @@ const Sidebar = props => {
 
         const isOpen = subMenusStates[index] ? subMenusStates[index].isOpen : null
 
-        const subMenuItemsJSX = item.subMenuItems.map((subMenuItem, subMenuItemIndex ) => {
+        const handleSubMenuItemClick = (menuItemIdx, subMenuIdx) => {
+            const newMenusCopy = JSON.parse(JSON.stringify(subMenusStates))
+            newMenusCopy[menuItemIdx]['selected'] = subMenuIdx;
+            setSubMenus(newMenusCopy);
+
+        }
+
+        const subMenuItemsJSX = item.subMenuItems.map((subMenuItem, subMenuItemIndex) => {
+            const isSubMenuItemSelected = subMenusStates[index]?.selected === subMenuItemIndex
+            console.log(isSubMenuItemSelected)
             return (
-                <Link to={`${item.to}${subMenuItem.to}`} key={subMenuItemIndex} style={{textDecoration: 'none'}}>
-                <s.SubMenuItem>{subMenuItem.name}</s.SubMenuItem>
+                <Link to={`${item.to}${subMenuItem.to}`} key={subMenuItemIndex} style={{ textDecoration: 'none' }}>
+                    <s.SubMenuItem
+                        onClick={() => handleSubMenuItemClick(index, subMenuItemIndex)}
+                        selected={isSubMenuItemSelected}
+                        colorPalette={colorPalette}
+                    >
+                        {subMenuItem.name}
+                    </s.SubMenuItem>
                 </Link>
             )
         })
 
         return (
             <s.ItemContainer key={index}>
-                <Link to={item.to} style={{textDecoration: 'none'}}>
+                <Link to={item.to} style={{ textDecoration: 'none' }}>
                     <s.MenuItem
                         fonts={fonts.menu}
                         selected={isItemSelected}
                         onClick={() => handleMenuItemClick(item.name, index)}
                         isSidebarOpen={isSidebarOpen}
+                        colorPalette={colorPalette}
                     >
                         <s.Icon isSidebarOpen={isSidebarOpen}>{item.icon}</s.Icon>
                         <s.Text isSidebarOpen={isSidebarOpen}>{item.name}</s.Text>   {/*tag p com uma string*/}
                         {hasSubmenus && isSidebarOpen && (
-                            <s.DropdownIcon selected={isItemSelected} isOpen={isOpen} />
+                            <s.DropdownIcon selected={isItemSelected}
+                                isOpen={isOpen}
+                                colorPalette={colorPalette}
+                            />
                         )}
                     </s.MenuItem>
                 </Link>
@@ -107,7 +143,7 @@ const Sidebar = props => {
                             transition={{ duration: 0.35 }}
                             exit={{ opacity: 0, x: -30 }}
                         >
-                            <s.SubMenuItemContainer isSidebarOpen={isSidebarOpen}>{subMenuItemsJSX}</s.SubMenuItemContainer>
+                            <s.SubMenuItemContainer isSidebarOpen={isSidebarOpen} colorPalette={colorPalette}>{subMenuItemsJSX}</s.SubMenuItemContainer>
                         </motion.nav>
                     )}
                 </AnimatePresence>
@@ -115,7 +151,7 @@ const Sidebar = props => {
         )
     })
     return (
-        <s.SidebarContainer backgroundImage={backgroundImage} isSidebarOpen={isSidebarOpen}>
+        <s.SidebarContainer backgroundImage={backgroundImage} isSidebarOpen={isSidebarOpen} colorPalette = {colorPalette}>
             <s.SidebarHeader font={fonts.header}>{header}</s.SidebarHeader>
             <s.MenuItemContainer>{menuItemsJSX}</s.MenuItemContainer>
             <s.TogglerContainer onClick={() => setSidebarState(!isSidebarOpen)} >

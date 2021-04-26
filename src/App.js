@@ -3,7 +3,7 @@ import * as s from './App.Styles'
 import Sidebar from './components/Sidebar/Sidebar'
 import MainView from './components/MainView/MainView'
 import { BsFillAlarmFill, BsFillBootstrapFill, BsFillPeopleFill } from "react-icons/bs";
-
+import * as Palette from './colors'
 const App = () => {
 
   const backgroundImage = 'img/2808.jpg'   /*converter para uma resolução menor antes do deploy*/
@@ -35,6 +35,7 @@ const App = () => {
         sidebarHeader={sidebarHeader}
         menuItems={menuItems}
         fonts={fonts}
+        colorPalette = {Palette.julyBlue}
       />
       <MainView />
     </s.App>
