@@ -74,26 +74,13 @@ const Sidebar = props => {
 
         const isOpen = subMenusStates[index] ? subMenusStates[index].isOpen : null
 
-
-
-
-
-        
-
-        const subMenuJSX = item.subMenuItems.map((item, index) => {
+        const subMenuItemsJSX = item.subMenuItems.map((subMenuItem, subMenuItemIndex ) => {
             return (
-                <Link to={item.to} key={index} style={{textDecoration: 'none'}}>
-                <s.SubMenuItem>{item.name}</s.SubMenuItem>
+                <Link to={`${item.to}${subMenuItem.to}`} key={subMenuItemIndex} style={{textDecoration: 'none'}}>
+                <s.SubMenuItem>{subMenuItem.name}</s.SubMenuItem>
                 </Link>
             )
         })
-
-
-
-
-
-
-
 
         return (
             <s.ItemContainer key={index}>
@@ -119,9 +106,8 @@ const Sidebar = props => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.35 }}
                             exit={{ opacity: 0, x: -30 }}
-
                         >
-                            <s.SubMenuItemContainer isSidebarOpen={isSidebarOpen}>{subMenuJSX}</s.SubMenuItemContainer>
+                            <s.SubMenuItemContainer isSidebarOpen={isSidebarOpen}>{subMenuItemsJSX}</s.SubMenuItemContainer>
                         </motion.nav>
                     )}
                 </AnimatePresence>

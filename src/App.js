@@ -14,14 +14,14 @@ const App = () => {
   const menuItems = [
     { name: "home", to: '/', icon: <BsFillAlarmFill />, subMenuItems: [] },
     {
-      name: "produtos", to: '/produtos', icon: <BsFillBootstrapFill />, subMenuItems: [
+      name: "clientes", to: '/clientes', icon: <BsFillBootstrapFill />, subMenuItems: [
         { name: "vendas", to: '/vendas' },
         { name: "inventário", to: '/inventario'},
         { name: "tony", to: '/inventario'},
         { name: "ramos", to: '/inventario'},
       ]
     },
-    { name: "clientes", to: '/clientes', icon: <BsFillPeopleFill />, subMenuItems: [] },
+    { name: "produtos", to: '/produtos', icon: <BsFillPeopleFill />, subMenuItems: [] },
   ];
   const fonts = {
     header: 'Archivo Black',
