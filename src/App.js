@@ -35,7 +35,7 @@ const App = () => {
         sidebarHeader={sidebarHeader}
         menuItems={menuItems}
         fonts={fonts}
-        colorPalette = {Palette.silver}
+        colorPalette = {Palette.pinkAndBlue}
       />
       <MainView /*pickup-a color*//>
     </s.App>
